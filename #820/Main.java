@@ -19,24 +19,26 @@ public class Main{
         (brain, in, rain)#(tree)#(internet)#
         brain
         */
-        String[] words = {"time", "bell", "me"};
-        int[] lengths = {4, 4, 2};
+        String[] words = {"time", "me"};
         // sort by length descending
         int length = words.length;
         String encoding = "#";
         //List<Integer> theseIndices = new ArrayList<Integer>();
         while(length > 0){
             String word = words[0];
-            int thisLength = lengths[0];
+            int thisLength = word.length();
             for(int i = 0; i < thisLength; i++){ //for all letters in these words
-                char letter = word.charAt(thisLength - i);
+                char letter = word.charAt(thisLength - i - 1);
                 for(int j = 0; j < length; j++){ //for all words
-                    if(lengths[j] >= thisLength){
-                        char theirLetter = words[j].charAt(lengths[j] - thisLength);
-
+                    if(words[j].length() - i > 0){
+                        char theirLetter = words[j].charAt(words[j].length() - i);
+                        if(letter == theirLetter){
+                            System.out.println("Common letter '" + theirLetter + "'.");
+                        }
                     }
                 }
             }
+            length = 0;
         }
     }
 }
