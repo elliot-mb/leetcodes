@@ -1,17 +1,29 @@
 function maxResult(nums: number[], k: number): number {
   // optimal way to reach i within k of current position 
   let dpQueue : number[] = [nums[0]];
+  let dpMaxHeap : MaxHeap = new MaxHeap(k); dpMaxHeap.add(nums[0]);
+
+  // for(let i : number = 1; i < nums.length; i++){
+  //   if(dpQueue.length > k) { dpQueue.splice(0, 1); }
+  //   let best : number = -Infinity;
+  //   for(let j : number = 0; j < dpQueue.length; j++){
+  //     best = best < dpQueue[j] ? dpQueue[j] : best; 
+  //   }
+  //   dpQueue.push(best + nums[i]);
+  // }
 
   for(let i : number = 1; i < nums.length; i++){
-    if(dpQueue.length > k) { dpQueue.splice(0, 1); }
-    let best : number = -Infinity;
-    for(let j : number = 0; j < dpQueue.length; j++){
-      best = best < dpQueue[j] ? dpQueue[j] : best; 
+    dpMaxHeap.show();
+    let best : number = dpMaxHeap.max();
+    if(dpMaxHeap.isFull()){
+      //dpMaxHeap.replaceRoot(best + nums[i]);
+      console.log(best + nums[i]);
+    }else{
+      //dpMaxHeap.add(best + nums[i]);
     }
-    dpQueue.push(best + nums[i]);
   }
 
-  return dpQueue[dpQueue.length - 1];
+  return dpMaxHeap.max();
 };
 
 export default class MaxHeap {
@@ -23,6 +35,10 @@ export default class MaxHeap {
     this.arr = [];
     this.items = 0;
     this.capacity = _capacity;
+  }
+
+  public isFull(): boolean{
+    return this.items == this.capacity;
   }
 
   private childrenOf(i : number): {left: number, right: number}{
@@ -41,21 +57,49 @@ export default class MaxHeap {
     return Math.floor((i + 1) / 2) - 1;
   }
 
-  public add(x : number): boolean{
-    if(this.items + 1 > this.capacity) { return false; }
-    this.arr.push(x);
-    return true;
-  }
-
-  private swap(a : number, b : number): void{
-    //swap our two values
+  private swap(a : number, b : number): void{ //O(1)
+    //swap our two indices
     this.arr[a] += this.arr[b];
     this.arr[b] = this.arr[a] - this.arr[b];
     this.arr[a] -= this.arr[b];
   }
 
-  public heapify(i : number): void{
-    this.show();
+  public max(): number{ //O(1)
+    return this.arr[0];
+  }
+
+  public extractMax(): number{
+    if(this.items === 0){
+      console.log("Heap is empty, cannot extract max.")
+      return -Infinity;
+    }
+    this.swap(0, this.items - 1);
+    let max : number = this.arr.splice(this.items - 1, 1)[0]; //remove the last element (swapped 
+    this.items--;
+    this.heapify(0);
+    return max;
+  }
+
+  public insert(x : number): void{ //O(logn)
+    if(!this.isFull()){
+      this.arr.push(-Infinity);
+      this.items++;
+      this.increaseValue(this.arr.length - 1, x);
+    }else{ console.log("Heap is full, cannot insert item."); }
+  }
+  
+  public increaseValue(i : number, x : number): void{ //O(logn)
+    if(x < this.arr[i]){
+      console.log("Can't reduce node to a larger number."); return;
+    }
+    this.arr[i] = x;
+    while(i > 0 && this.arr[this.parentOf(i)] < this.arr[i]){
+      this.swap(this.parentOf(i), i);
+      i = this.parentOf(i);
+    }
+  }
+
+  private heapify(i : number): void{ //O(logn)
     let left : number = this.childrenOf(i).left;
     let right : number = this.childrenOf(i).right;
     if(this.hasNoChildren(i)){ return; } //no children
@@ -76,8 +120,9 @@ export default class MaxHeap {
     return;
   }
 
-  public buildHeap(): void{
-    
+  private buildHeap(): void{ //O(n)
+    let lastBranchIndex : number = Math.pow(2, Math.floor(Math.log2(this.arr.length))) - 2;
+    for(let i : number = lastBranchIndex; i >= 0; i--){ this.heapify(i); }
   }
 
   public getArr(): number[]{
@@ -89,27 +134,22 @@ export default class MaxHeap {
   }
 }
 
-let hp : MaxHeap = new MaxHeap(17);
-// pq.add(5);
-// pq.show();
-// pq.add(10);
-// pq.show();
-// pq.add(11);
-// pq.show();
-// pq.add(9);
-// pq.show();
-// pq.add(3);
-// pq.add(2);
-// pq.add(4);
-// pq.show();
-hp.add(5);
-hp.add(4);
-hp.add(6);
-hp.add(2);
-hp.add(5);
-hp.add(3);
-hp.add(1);
+let hp : MaxHeap = new MaxHeap(20);
+hp.insert(1);
+hp.insert(2);
+hp.insert(-12909);
+hp.insert(-1224);
+hp.insert(-12910);
+hp.increaseValue(2, 3);
+hp.increaseValue(3, -10);
+hp.increaseValue(4, 2);
 hp.show();
-hp.heapify(0);
-//hp.show();
-//console.log(maxResult([0,-1,-2,-3,1], 2));
+console.log(hp.extractMax());
+hp.show();
+console.log(hp.extractMax());
+hp.show();
+console.log(hp.extractMax());
+hp.show();
+console.log(hp.extractMax());
+hp.show();
+//console.log(maxResult([1,-1,-2,4,-7,3], 2));
