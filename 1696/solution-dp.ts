@@ -1,29 +1,18 @@
 function maxResult(nums: number[], k: number): number {
   // optimal way to reach i within k of current position 
-  let dpQueue : number[] = [nums[0]];
-  let dpMaxHeap : MaxHeap = new MaxHeap(k); dpMaxHeap.add(nums[0]);
+  let n : number = nums.length;
+  let score : number[] = new Array(n);
+  let dpMaxHeap : MaxHeap = new MaxHeap(k); //dpMaxHeap.insert(nums[0]);
 
-  // for(let i : number = 1; i < nums.length; i++){
-  //   if(dpQueue.length > k) { dpQueue.splice(0, 1); }
-  //   let best : number = -Infinity;
-  //   for(let j : number = 0; j < dpQueue.length; j++){
-  //     best = best < dpQueue[j] ? dpQueue[j] : best; 
-  //   }
-  //   dpQueue.push(best + nums[i]);
-  // }
-
-  for(let i : number = 1; i < nums.length; i++){
+  for(let i : number = n - 1; i >= 0; i--){
+    console.log(nums[i]);
+    let best : number = dpMaxHeap.isFull() ? dpMaxHeap.extractMax() : dpMaxHeap.max();
+    score[i] = nums[i] + best;
+    dpMaxHeap.insert(best + nums[i]);
     dpMaxHeap.show();
-    let best : number = dpMaxHeap.max();
-    if(dpMaxHeap.isFull()){
-      //dpMaxHeap.replaceRoot(best + nums[i]);
-      console.log(best + nums[i]);
-    }else{
-      //dpMaxHeap.add(best + nums[i]);
-    }
   }
 
-  return dpMaxHeap.max();
+  return score[0];
 };
 
 export default class MaxHeap {
@@ -74,7 +63,7 @@ export default class MaxHeap {
       return -Infinity;
     }
     this.swap(0, this.items - 1);
-    let max : number = this.arr.splice(this.items - 1, 1)[0]; //remove the last element (swapped 
+    let max : number = this.arr.splice(this.items - 1, 1)[0]; //remove the last element (swapped root) 
     this.items--;
     this.heapify(0);
     return max;
@@ -135,21 +124,21 @@ export default class MaxHeap {
 }
 
 let hp : MaxHeap = new MaxHeap(20);
-hp.insert(1);
-hp.insert(2);
-hp.insert(-12909);
-hp.insert(-1224);
-hp.insert(-12910);
-hp.increaseValue(2, 3);
-hp.increaseValue(3, -10);
-hp.increaseValue(4, 2);
-hp.show();
-console.log(hp.extractMax());
-hp.show();
-console.log(hp.extractMax());
-hp.show();
-console.log(hp.extractMax());
-hp.show();
-console.log(hp.extractMax());
-hp.show();
-//console.log(maxResult([1,-1,-2,4,-7,3], 2));
+// hp.insert(1);
+// hp.insert(2);
+// hp.insert(-12909);
+// hp.insert(-1224);
+// hp.insert(-12910);
+// hp.increaseValue(2, 3);
+// hp.increaseValue(3, -10);
+// hp.increaseValue(4, 2);
+// hp.show();
+// console.log(hp.extractMax());
+// hp.show();
+// console.log(hp.extractMax());
+// hp.show();
+// console.log(hp.extractMax());
+// hp.show();
+// console.log(hp.extractMax());
+// hp.show();
+console.log(maxResult([1,-1,-2,4,-7,3], 2));
