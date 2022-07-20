@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.xml.crypto.dsig.keyinfo.KeyValue;
+import java.sql.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -49,15 +51,24 @@ public class Solution {
         List<Integer> ordered = new ArrayList<Integer>();
         while(pq.size() > 0) { ordered.add(pq.poll()); } //creates ordered list through heap sort
         System.out.println("MAKING " + sideLength);
+
+        List<List<Integer>> useds = new ArrayList<List<Integer>>();
+        List<Integer> sums = new ArrayList<Integer>();
         for(int i = 0; i < 4; i++){
             List<Integer> used = arraySum(ordered.stream().mapToInt(Integer::intValue).toArray(), sideLength);
             System.out.println(used + " | " + ordered);
-            if(used.stream().reduce(0, Integer::sum) != sideLength) return false;
+            sums.add(used.stream().reduce(0, Integer::sum));
+            //if(used.stream().reduce(0, Integer::sum) != sideLength) return false;
+            useds.add(new ArrayList<Integer>());
+            int last = useds.size() - 1;
             for(Integer n : used){
                 ordered.remove(n);
+                useds.get(last).add(n);
             }
         }
-
+        System.out.println(sums);
+        System.out.println(useds);
+        System.out.println(Arrays.stream(matchsticks).boxed().collect(Collectors.toList()));
         return true;
     }
 
