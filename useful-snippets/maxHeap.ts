@@ -10,7 +10,11 @@ export default class MaxHeap {
   }
 
   public isFull(): boolean{
-    return this.items == this.capacity;
+    return this.items === this.capacity;
+  }
+
+  public isEmpty() : boolean { 
+    return this.items === 0;
   }
 
   private childrenOf(i : number): {left: number, right: number}{
@@ -36,23 +40,21 @@ export default class MaxHeap {
     this.arr[a] -= this.arr[b];
   }
 
-  public max(): number{ //O(1)
+  public max(): number | string { //O(1)
+    if(this.isEmpty()){ return "Heap is empty; contains no maximum."; }
     return this.arr[0];
   }
 
-  public extractMax(): number{
-    if(this.items === 0){
-      console.log("Heap is empty, cannot extract max.")
-      return -Infinity;
-    }
+  public extractMax(): number | string { //Either string number (left is error)
+    if(this.isEmpty()){ return "Heap is empty; cannot extract max."; }
     this.swap(0, this.items - 1);
     let max : number = this.arr.splice(this.items - 1, 1)[0]; //remove the last element (swapped root) 
     this.items--;
     this.heapify(0);
-    return max;
+    return max === undefined ? "Max is undefined" : max;
   }
 
-  public insert(x : number): void{ //O(logn)
+  public insert(x : number): void { //O(logn)
     if(!this.isFull()){
       this.arr.push(-Infinity);
       this.items++;
@@ -60,7 +62,7 @@ export default class MaxHeap {
     }else{ console.log("Heap is full, cannot insert item."); }
   }
   
-  public increaseValue(i : number, x : number): void{ //O(logn)
+  public increaseValue(i : number, x : number): void { //O(logn)
     if(x < this.arr[i]){
       console.log("Can't reduce node to a larger number."); return;
     }
@@ -71,7 +73,7 @@ export default class MaxHeap {
     }
   }
 
-  private heapify(i : number): void{ //O(logn)
+  private heapify(i : number): void { //O(logn)
     let left : number = this.childrenOf(i).left;
     let right : number = this.childrenOf(i).right;
     if(this.hasNoChildren(i)){ return; } //no children
@@ -92,16 +94,16 @@ export default class MaxHeap {
     return;
   }
 
-  private buildHeap(): void{ //O(n)
+  private buildHeap(): void { //O(n)
     let lastBranchIndex : number = Math.pow(2, Math.floor(Math.log2(this.arr.length))) - 2;
     for(let i : number = lastBranchIndex; i >= 0; i--){ this.heapify(i); }
   }
 
-  public getArr(): number[]{
+  public getArr(): number[] {
     return this.arr;
   }
 
-  public show() : void{
-    console.log(`MaxHeap: ${this.arr}`);
+  public show() : string {
+    return `MaxHeap ${this.arr}`;
   }
 }
