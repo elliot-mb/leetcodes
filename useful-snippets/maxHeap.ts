@@ -3,10 +3,10 @@ export default class MaxHeap {
   private items : number;
   private capacity : number;
 
-  constructor(_capacity){ //must start empty 
+  constructor(_capacity? : number){ //must start empty 
     this.arr = [];
     this.items = 0;
-    this.capacity = _capacity;
+    this.capacity = _capacity === undefined ? 10 : _capacity; //default capacity of 10
   }
 
   public isFull(): boolean{
