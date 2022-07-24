@@ -25,7 +25,7 @@ function countSmaller(nums: number[]): number[] {
   [7:5
   ,3:2
   ,9:6
-  ,5:3
+  ,5:3a
   ,2:1
   ,6:4
   ,1:0]
