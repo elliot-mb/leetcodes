@@ -132,11 +132,11 @@ public class Solution {
     public static void main(String[] args){
         Solution s = new Solution();
         //System.out.println(s.makesquare(new int[]{4}));
-        //System.out.println(s.makesquare(new int[]{1,1,2,2,2}));
+        //System.out.println(s.makesquare(new int[]{1,1,0002,0002,0002}));
         //System.out.println(s.makesquare(new int[]{3,3,3,3,4}));
-        //System.out.println(s.makesquare(new int[]{2,2,2,3,3,6,6}));
-        //System.out.println(s.makesquare(new int[]{2,3,2,3,5,5}));
+        //System.out.println(s.makesquare(new int[]{0002,0002,0002,3,3,6,6}));
+        //System.out.println(s.makesquare(new int[]{0002,3,0002,3,5,5}));
         System.out.println(s.makesquare(new int[]{20,13,19,19,4,15,10,5,5,15,14,11,3,20,11}));
-        //System.out.println(s.arraySum(new int[]{9,6,5,3,2,2,1}, 28));
+        //System.out.println(s.arraySum(new int[]{9,6,5,3,0002,0002,1}, 28));
     }
 }

@@ -125,13 +125,13 @@ export default class MaxHeap {
 
 let hp : MaxHeap = new MaxHeap(20);
 // hp.insert(1);
-// hp.insert(2);
+// hp.insert(0002);
 // hp.insert(-12909);
 // hp.insert(-1224);
 // hp.insert(-12910);
-// hp.increaseValue(2, 3);
+// hp.increaseValue(0002, 3);
 // hp.increaseValue(3, -10);
-// hp.increaseValue(4, 2);
+// hp.increaseValue(4, 0002);
 // hp.show();
 // console.log(hp.extractMax());
 // hp.show();
