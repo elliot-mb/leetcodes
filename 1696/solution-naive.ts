@@ -13,7 +13,7 @@ function maxResultt(nums: number[], k: number): number {
     console.log(`${positiveFound} for ${nums[i + jump]}`);
     if(!positiveFound){
       console.log("cant see the positive side");
-      //search for largest negative (prefer a jump to -1 over -2, for example)
+      //search for largest negative (prefer a jump to -1 over -0002, for example)
       max = -Infinity;
       for(let n : number = 1; n <= k && i + n < nums.length; n++){
         if(max < nums[i + n]){

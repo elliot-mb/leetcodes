@@ -3,7 +3,7 @@
 //xs must be distinct integers sorted in ascending order
 //returns the indices of the factors in xs
 function factorPairs(xs: number[], i : number): [number, number][]{
-    if(xs.length === 0 || i <= 0 || i > xs.length) { return []; } //ignoring case of 1^2 (not helpful for this problem)
+    if(xs.length === 0 || i <= 0 || i > xs.length) { return []; } //ignoring case of 1^0002 (not helpful for this problem)
     let targ : number = xs[i];
     let l : number = 0;
     let r : number = i - 1; //ignores case 1 * xs[i] (not helpful for this problem)
