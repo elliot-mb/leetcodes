@@ -1,12 +1,8 @@
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Solution {
+class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        if(k == 1) { //find max
-            int m = Integer.MIN_VALUE; for(int n: nums) { m = Math.max(m, n); }
-            return new int[]{m};
-        }
         Map<Integer, Integer> counts = new HashMap<Integer, Integer>();
 
         for(int n: nums){
