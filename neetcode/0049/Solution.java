@@ -16,6 +16,7 @@ public class Solution {
 
         for(int i = 0; i < strsCopy.size(); i++){
             String str = strsCopy.get(i); //gets sorted string
+            groupMap.computeIfAbsent(str, s -> new ArrayList<>());
             if(groupMap.containsKey(str)){
                 groupMap.get(str).add(i); //adds to group if, when sorted, it's the same (anagram of the same letters)
             }else{
