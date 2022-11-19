@@ -12,7 +12,7 @@ class Solution:
             for x in nums:
                 prodArray[x + OFFSET] += 1 # only accepts numbers between -30 and 30
             
-            print(prodArray)
+            #print(prodArray)
             for i in range(0, len(prodArray)):
                 if(prodArray[i] > -1):
                     uniques.append(i - OFFSET)
@@ -21,7 +21,7 @@ class Solution:
             prodBase: int = 1 #lowest a product can be 
             for x in prodArray:
                 if(x > 0): #if its zero, sure its there, but it wont contribute to base
-                    print("there are", x, " ", i, "s, product is ", pow(i, x))
+                    #print("there are", x, " ", i, "s, product is ", pow(i, x))
                     prodBase *= pow(i, x)
                 i += 1
 
@@ -29,7 +29,7 @@ class Solution:
             for x in nums:
                 # multiply by all the uniques that arent it
                 uniquesDiff: List[int] = list(filter(lambda y: y != x, uniques))
-                print(uniquesDiff)
+                #print(uniquesDiff)
                 result.append(prodBase * reduce(lambda a, b: a * b,uniquesDiff))
                 j += 1
                 
