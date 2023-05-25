@@ -7,3 +7,4 @@ out
 Cargo.lock
 Cargo.toml
 target/
+.vs/

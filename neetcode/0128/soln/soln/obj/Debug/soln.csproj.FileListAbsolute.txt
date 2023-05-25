@@ -1,0 +1,7 @@
+C:\Users\ellio\source\repos\leetcodes\neetcode\0128\soln\soln\bin\Debug\soln.exe.config
+C:\Users\ellio\source\repos\leetcodes\neetcode\0128\soln\soln\bin\Debug\soln.exe
+C:\Users\ellio\source\repos\leetcodes\neetcode\0128\soln\soln\bin\Debug\soln.pdb
+C:\Users\ellio\source\repos\leetcodes\neetcode\0128\soln\soln\obj\Debug\soln.csproj.AssemblyReference.cache
+C:\Users\ellio\source\repos\leetcodes\neetcode\0128\soln\soln\obj\Debug\soln.csproj.CoreCompileInputs.cache
+C:\Users\ellio\source\repos\leetcodes\neetcode\0128\soln\soln\obj\Debug\soln.exe
+C:\Users\ellio\source\repos\leetcodes\neetcode\0128\soln\soln\obj\Debug\soln.pdb
